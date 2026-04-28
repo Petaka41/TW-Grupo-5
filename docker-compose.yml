@@ -21,11 +21,8 @@ services:
       MYSQL_DATABASE: deportivo_db
       MYSQL_USER: grupo5
       MYSQL_PASSWORD: mi_password
-      TZ=Europe/Madrid
     volumes:
       - ./data:/var/lib/mysql:Z
-      # Automatización: Carga el esquema al iniciar el contenedor
-      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:Z
     networks:
       - deportivo-network
 

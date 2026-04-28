@@ -1,6 +1,6 @@
 # Docker
 data/
-.env
+
 
 # OS específicos
 .DS_Store
