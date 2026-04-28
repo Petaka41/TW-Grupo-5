@@ -1,0 +1,10 @@
+# Docker
+data/
+.env
+
+# OS específicos
+.DS_Store
+Thumbs.db
+
+# PHP dependencias (si usaras composer)
+vendor/

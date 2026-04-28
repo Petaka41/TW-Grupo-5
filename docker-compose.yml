@@ -1,0 +1,34 @@
+services:
+  app:
+    build: .
+    container_name: deportivo-app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html:Z
+    environment:
+      - DB_HOST=db
+      - TZ=Europe/Madrid
+    networks:
+      - deportivo-network
+
+  db:
+    image: mariadb:10.11
+    container_name: deportivo-db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: deportivo_db
+      MYSQL_USER: grupo5
+      MYSQL_PASSWORD: mi_password
+      TZ=Europe/Madrid
+    volumes:
+      - ./data:/var/lib/mysql:Z
+      # Automatización: Carga el esquema al iniciar el contenedor
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:Z
+    networks:
+      - deportivo-network
+
+networks:
+  deportivo-network:
+    driver: bridge
