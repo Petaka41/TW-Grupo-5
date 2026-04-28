@@ -62,6 +62,71 @@ Crea las tablas y la estructura necesaria en MariaDB:
 docker exec -it deportivo-app php artisan migrate
 ```
 
+Para **recrear todo** e insertar datos de demo (admin, socio, 5 actividades y turnos):
+
+```bash
+docker exec -it deportivo-app php artisan migrate:fresh --seed
+```
+
+**Comando de salvación:** si un compañero deja la base local incoherente (migraciones a medias, datos rotos), lo habitual es ejecutar de nuevo `migrate:fresh --seed` **solo en entorno local** (borra todas las tablas y vuelve al estado demo).
+
+### Credenciales de demo (entrega / pruebas)
+
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| Administrador | `admin@deportivo.test` | `password` |
+| Socio | `socio@deportivo.test` | `password` |
+
+Tras `migrate:fresh --seed` siempre existirán estos dos usuarios. Más detalle de campos y rutas: [docs/campos-api.md](docs/campos-api.md).
+
+### 7. Enlace de almacenamiento (imágenes de actividades)
+
+```bash
+docker exec -it deportivo-app php artisan storage:link
+```
+
+### 8. Front-end (Vite / Laravel Breeze)
+
+Las vistas de autenticación usan Vite. **En tu máquina** (no hace falta que el contenedor tenga Node), dentro de `src/`:
+
+```bash
+cd src
+npm install
+npm run build
+```
+
+En desarrollo local puedes usar `npm run dev` si tienes Node 20+.
+
+**Sin Node instalado:** el contenedor Docker de la app no incluye Node. Tras que alguien del equipo ejecute `npm run build` una vez, los CSS/JS compilados quedan en `src/public/build` en su copia local y la aplicación sirve esos assets sin necesidad de volver a compilar. Esa carpeta suele **no** subirse a Git (está en `.gitignore`); si clonas el repo y no ves estilos, o bien generas `public/build` con Node 20+, o te pasan esa carpeta desde quien ya haya hecho el build.
+
+### 9. Contrato de datos para el equipo
+
+- Campos Eloquent, rutas nombradas y usuarios de prueba: [docs/campos-api.md](docs/campos-api.md).
+- **Especificación técnica y manual de operaciones** (Git, tests, glosario de errores de reserva, política de cancelación): [docs/BACKEND_TECHNICAL_SPEC.md](docs/BACKEND_TECHNICAL_SPEC.md).
+- **Guía de pruebas PHPUnit** (inventario de los 28 tests, comandos Docker/local, filtros): [docs/TESTING.md](docs/TESTING.md).
+
+---
+
+## Colaboración en Git (equipo)
+
+- Rama **`main`:** solo cambios estables que pasen `php artisan test` y funcionen con Docker.
+- **Ramas propias:** `feat/…`, `fix/…` (ej. `feat/frontend-catalogo`). Evitar trabajar todos en `main`.
+- **Pull Requests:** revisión por al menos otro compañero antes de fusionar; comprobar login, catálogo y flujo demo si aplica.
+
+Detalle ampliado: [docs/BACKEND_TECHNICAL_SPEC.md](docs/BACKEND_TECHNICAL_SPEC.md) (sección *10. Operación en equipo*).
+
+---
+
+## Pruebas automatizadas
+
+Con los contenedores en marcha:
+
+```bash
+docker exec -it deportivo-app php artisan test
+```
+
+La suite actual valida sobre todo **autenticación y perfil (Breeze)**, la página de inicio y **cancelación de reservas** (dueño, regla `start_time`, 403 entre usuarios). Convención del equipo: ejecutar tests antes de fusionar a `main`. **Inventario detallado de cada test y opciones de ejecución:** [docs/TESTING.md](docs/TESTING.md). Ampliación recomendada (`bookings.store`, admin): ver la spec técnica, sección 10.2.
+
 ---
 
 ## 🌐 Detalles del entorno
@@ -81,6 +146,14 @@ Una vez completados los pasos, podrás acceder en:
 ---
 
 ## ⚠️ Solución de problemas comunes
+
+> [!IMPORTANT]
+> **¿La web se ve sin estilos (HTML “pelado”, sin CSS de Tailwind)?**  
+> Ocurre porque **`src/public/build`** no está en Git (está en `.gitignore`): un `git clone` fresco no trae los assets compilados de Vite.
+>
+> **Soluciones:**
+> 1. Con **Node 20+**, en la carpeta `src/`: `npm install` y `npm run build`.
+> 2. Sin Node: pide a un compañero la carpeta **`build`** generada tras el build y colócala en **`src/public/build`** (ruta exacta).
 
 ### Error de permisos (`tempnam` o "Permission Denied")
 
