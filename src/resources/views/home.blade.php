@@ -4,111 +4,110 @@
 
 @section('content')
 
-<!-- HERO -->
-<section class="relative h-[500px] flex items-center justify-center bg-cover bg-center"
-    style="background-image: url('https://images.unsplash.com/photo-1558611848-73f7eb4001a1');">
+<section class="hero home-hero">
+    <div class="hero-card">
+        <h1>Reserva tus actividades deportivas fácilmente</h1>
 
-    <div class="bg-black/60 p-10 rounded-xl text-center text-white max-w-3xl">
-        <h1 class="text-4xl font-bold mb-4">
-            Reserva tus actividades deportivas fácilmente
-        </h1>
-
-        <p class="mb-6 text-lg">
-            Accede a las mejores instalaciones y actividades en un solo lugar
+        <p>
+            Accede a las mejores instalaciones y actividades en un solo lugar.
         </p>
 
-        <div class="flex justify-center gap-4">
-            <a href="{{ route('activities.index') }}"
-               class="bg-orange-500 px-6 py-3 rounded-lg font-semibold hover:bg-orange-600">
+        <div class="hero-buttons">
+            <a href="{{ route('activities.index') }}" class="btn-primary">
                 Ver actividades
             </a>
 
-            <a href="{{ route('register') }}"
-               class="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">
+            <a href="{{ route('register') }}" class="btn-secondary">
                 Registrarse
             </a>
         </div>
     </div>
 </section>
 
-<!-- ACTIVIDADES DESTACADAS -->
-<section class="py-16 px-8 bg-gray-50">
-    <h2 class="text-3xl font-bold text-center mb-10">
-        Actividades destacadas
-    </h2>
+<section class="home-section activities-section">
+    <h2>Actividades destacadas</h2>
 
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="cards-grid">
 
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3" class="w-full h-40 object-cover">
-            <div class="p-5">
-                <h3 class="font-bold text-lg mb-2">Yoga Matinal</h3>
-                <p class="text-gray-600 text-sm mb-3">Empieza el día con energía</p>
-                <p class="text-sm"><b>Horario:</b> 07:00 - 08:00</p>
-                <p class="text-sm mb-3"><b>Plazas:</b> 12/15</p>
+        <article class="activity-card">
+            <img 
+                src="https://images.unsplash.com/photo-1552196563-55cd4e45efb3?auto=format&fit=crop&w=900&q=80" 
+                alt="Clase de yoga matinal"
+            >
 
-                <a href="#" class="block text-center bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600">
+            <div class="card-content">
+                <h3>Yoga Matinal</h3>
+                <p>Empieza el día con energía.</p>
+                <p><strong>Horario:</strong> 07:00 - 08:00</p>
+                <p><strong>Plazas:</strong> 12/15</p>
+
+                <a href="{{ route('activities.index') }}" class="btn-card">
                     Ver detalle
                 </a>
             </div>
-        </div>
+        </article>
 
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61" class="w-full h-40 object-cover">
-            <div class="p-5">
-                <h3 class="font-bold text-lg mb-2">CrossFit Intenso</h3>
-                <p class="text-gray-600 text-sm mb-3">Entrenamiento de alta intensidad</p>
-                <p class="text-sm"><b>Horario:</b> 18:00 - 19:00</p>
-                <p class="text-sm mb-3"><b>Plazas:</b> 18/20</p>
+        <article class="activity-card">
+            <img 
+                src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=80" 
+                alt="Entrenamiento de CrossFit"
+            >
 
-                <a href="#" class="block text-center bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600">
+            <div class="card-content">
+                <h3>CrossFit Intenso</h3>
+                <p>Entrenamiento de alta intensidad.</p>
+                <p><strong>Horario:</strong> 18:00 - 19:00</p>
+                <p><strong>Plazas:</strong> 18/20</p>
+
+                <a href="{{ route('activities.index') }}" class="btn-card">
                     Ver detalle
                 </a>
             </div>
-        </div>
+        </article>
 
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773" class="w-full h-40 object-cover">
-            <div class="p-5">
-                <h3 class="font-bold text-lg mb-2">Natación Adultos</h3>
-                <p class="text-gray-600 text-sm mb-3">Clases para nivel intermedio</p>
-                <p class="text-sm"><b>Horario:</b> 19:00 - 20:00</p>
-                <p class="text-sm mb-3"><b>Plazas:</b> 8/12</p>
+        <article class="activity-card">
+            <img 
+                src="https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=900&q=80" 
+                alt="Clase de natación para adultos"
+            >
 
-                <a href="#" class="block text-center bg-orange-500 text-white py-2 rounded-md hover:bg-orange-600">
+            <div class="card-content">
+                <h3>Natación Adultos</h3>
+                <p>Clases para nivel intermedio.</p>
+                <p><strong>Horario:</strong> 19:00 - 20:00</p>
+                <p><strong>Plazas:</strong> 8/12</p>
+
+                <a href="{{ route('activities.index') }}" class="btn-card">
                     Ver detalle
                 </a>
             </div>
-        </div>
+        </article>
 
     </div>
 </section>
 
-<!-- BENEFICIOS -->
-<section class="py-16 px-8">
-    <h2 class="text-3xl font-bold text-center mb-10">
-        ¿Por qué elegirnos?
-    </h2>
+<section class="home-section benefits-section">
+    <h2>¿Por qué elegirnos?</h2>
 
-    <div class="grid md:grid-cols-3 gap-8 text-center">
+    <div class="cards-grid benefits-grid">
 
-        <div class="bg-white p-6 rounded-xl shadow">
-            <div class="text-orange-500 text-3xl mb-3">⏱</div>
-            <h3 class="font-bold mb-2">Reserva Online</h3>
-            <p class="text-gray-600">Reserva tus clases en cualquier momento</p>
-        </div>
+        <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">⏱</div>
+            <h3>Reserva Online</h3>
+            <p>Reserva tus clases en cualquier momento.</p>
+        </article>
 
-        <div class="bg-white p-6 rounded-xl shadow">
-            <div class="text-orange-500 text-3xl mb-3">👥</div>
-            <h3 class="font-bold mb-2">Control de horarios</h3>
-            <p class="text-gray-600">Gestiona tus actividades fácilmente</p>
-        </div>
+        <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">👥</div>
+            <h3>Control de horarios</h3>
+            <p>Gestiona tus actividades fácilmente.</p>
+        </article>
 
-        <div class="bg-white p-6 rounded-xl shadow">
-            <div class="text-orange-500 text-3xl mb-3">🏅</div>
-            <h3 class="font-bold mb-2">Instalaciones modernas</h3>
-            <p class="text-gray-600">Equipamiento de última generación</p>
-        </div>
+        <article class="benefit-card">
+            <div class="benefit-icon" aria-hidden="true">🏅</div>
+            <h3>Instalaciones modernas</h3>
+            <p>Equipamiento de última generación.</p>
+        </article>
 
     </div>
 </section>
