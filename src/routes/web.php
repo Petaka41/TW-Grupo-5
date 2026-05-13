@@ -13,7 +13,7 @@ Route::get('/', HomeController::class)->name('home');
 
 Route::get('/actividades', [CatalogController::class, 'index'])->name('activities.index');
 Route::get('/actividades/{activity}', [CatalogController::class, 'show'])->name('activities.show');
-
+Route::view('/instalaciones', 'installations.index')->name('installations.index');
 Route::get('/contacto', ContactController::class)->name('contact');
 
 Route::get('/dashboard', function () {

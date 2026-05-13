@@ -1,27 +1,96 @@
 @extends('layouts.public')
 
-@section('title', 'Catálogo — '.config('app.name'))
+@section('title', 'Catálogo de actividades — '.config('app.name'))
 
 @section('content')
-    <h1 class="text-2xl font-bold mb-6">Catálogo de actividades</h1>
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+<section class="catalog-page">
+
+    <div class="catalog-header">
+        <h1>Catálogo de Actividades</h1>
+    </div>
+
+    <form method="GET" action="{{ route('activities.index') }}" class="catalog-filters">
+        <div class="search-wrapper">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <input
+                type="search"
+                name="search"
+                placeholder="Buscar actividad..."
+                value="{{ request('search') }}"
+                aria-label="Buscar actividad"
+            >
+        </div>
+
+        <select name="installation" aria-label="Filtrar por instalación">
+            <option value="">Todas las instalaciones</option>
+            <option value="sala-fitness">Sala Fitness</option>
+            <option value="gimnasio-principal">Gimnasio Principal</option>
+            <option value="piscina-olimpica">Piscina Olímpica</option>
+        </select>
+
+        <select name="day" aria-label="Filtrar por día">
+            <option value="">Todos los días</option>
+            <option value="lunes">Lunes</option>
+            <option value="martes">Martes</option>
+            <option value="miercoles">Miércoles</option>
+            <option value="jueves">Jueves</option>
+            <option value="viernes">Viernes</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+        </select>
+
+        <button type="submit" class="filter-button">Filtrar</button>
+    </form>
+
+    <div class="activities-grid">
         @forelse ($activities as $activity)
-            <article class="bg-white rounded-lg shadow overflow-hidden">
+
+            <article class="catalog-card">
+
                 @if ($activity->image_path)
-                    <img src="{{ Storage::url($activity->image_path) }}" alt="" class="h-40 w-full object-cover">
+                    <img
+                        src="{{ Storage::url($activity->image_path) }}"
+                        alt="Imagen de {{ $activity->name }}"
+                        class="catalog-card-image"
+                    >
                 @else
-                    <div class="h-40 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">Sin imagen</div>
+                    <div class="catalog-card-image no-image">
+                        Sin imagen
+                    </div>
                 @endif
-                <div class="p-4">
-                    <h2 class="font-semibold text-lg">{{ $activity->name }}</h2>
-                    <p class="text-sm text-gray-600 mt-1 line-clamp-3">{{ $activity->description }}</p>
-                    <p class="text-sm mt-2">Capacidad: {{ $activity->max_capacity }}</p>
-                    <a href="{{ route('activities.show', $activity) }}" class="mt-3 inline-block text-indigo-600 hover:underline text-sm">Ver detalle y horarios</a>
+
+                <div class="catalog-card-body">
+                    <h2>{{ $activity->name }}</h2>
+
+                    <p class="catalog-description">
+                        {{ \Illuminate\Support\Str::limit($activity->description, 95) }}
+                    </p>
+
+                    @if (!empty($activity->instructor))
+                        <p><strong>Instructor:</strong> {{ $activity->instructor }}</p>
+                    @endif
+
+                    <p><strong>Capacidad:</strong> {{ $activity->max_capacity }} plazas</p>
+
+                    <a href="{{ route('activities.show', $activity) }}" class="catalog-button">
+                        Ver detalle y horarios
+                    </a>
                 </div>
+
             </article>
+
         @empty
-            <p>No hay actividades publicadas todavía.</p>
+            <div class="empty-catalog">
+                <p>No hay actividades publicadas todavía.</p>
+            </div>
         @endforelse
     </div>
-    <div class="mt-8">{{ $activities->links() }}</div>
+
+    <div class="catalog-pagination">
+        {{ $activities->links() }}
+    </div>
+
+</section>
+
 @endsection

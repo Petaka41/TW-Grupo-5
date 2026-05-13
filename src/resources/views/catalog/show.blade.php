@@ -3,50 +3,151 @@
 @section('title', $activity->name.' — '.config('app.name'))
 
 @section('content')
-    <a href="{{ route('activities.index') }}" class="text-sm text-indigo-600 hover:underline mb-4 inline-block">&larr; Volver al catálogo</a>
-    <div class="bg-white rounded-lg shadow p-6">
-        <div class="md:flex gap-6">
-            @if ($activity->image_path)
-                <img src="{{ Storage::url($activity->image_path) }}" alt="" class="w-full md:w-64 h-48 object-cover rounded-md">
-            @endif
-            <div>
-                <h1 class="text-2xl font-bold">{{ $activity->name }}</h1>
-                <p class="mt-2 text-gray-700 whitespace-pre-line">{{ $activity->description }}</p>
-                <p class="mt-2 text-sm text-gray-600">Plazas por turno: {{ $activity->max_capacity }}</p>
-            </div>
-        </div>
-    </div>
 
-    <h2 class="text-xl font-semibold mt-8 mb-4">Próximos turnos</h2>
-    <ul class="space-y-3">
-        @forelse ($timeSlots as $slot)
-            @php
-                $booked = $slot->bookings_count;
-                $full = $booked >= $activity->max_capacity;
-            @endphp
-            <li class="bg-white rounded shadow px-4 py-3 flex flex-wrap items-center justify-between gap-2">
+<section class="activity-detail-page">
+
+    <a href="{{ route('activities.index') }}" class="back-link">
+        ← Volver al catálogo
+    </a>
+
+    <article class="activity-detail-card">
+
+        @if ($activity->image_path)
+            <img
+                src="{{ Storage::url($activity->image_path) }}"
+                alt="Imagen de {{ $activity->name }}"
+                class="activity-detail-image"
+            >
+        @else
+            <div class="activity-detail-image activity-detail-placeholder">
                 <div>
-                    <span class="font-medium">{{ $slot->start_time->translatedFormat('d/m/Y H:i') }}</span>
-                    —
-                    <span>{{ $slot->end_time->format('H:i') }}</span>
-                    <span class="text-sm text-gray-600 ml-2">({{ $booked }}/{{ $activity->max_capacity }} ocupadas)</span>
+                    <span>G5 Sport</span>
+                    <strong>{{ $activity->name }}</strong>
                 </div>
-                @auth
-                    @if (! $full)
-                        <form method="post" action="{{ route('bookings.store') }}" class="inline">
-                            @csrf
-                            <input type="hidden" name="time_slot_id" value="{{ $slot->id }}">
-                            <button type="submit" class="px-3 py-1 bg-indigo-600 text-white text-sm rounded hover:bg-indigo-700">Reservar</button>
-                        </form>
-                    @else
-                        <span class="text-sm text-red-600">Completo</span>
-                    @endif
-                @else
-                    <a href="{{ route('login') }}" class="text-sm text-indigo-600 hover:underline">Inicia sesión para reservar</a>
-                @endauth
-            </li>
-        @empty
-            <li class="text-gray-600">No hay turnos programados.</li>
-        @endforelse
-    </ul>
+            </div>
+        @endif
+
+        <div class="activity-detail-content">
+
+            <div class="activity-title-block">
+                <h1>{{ $activity->name }}</h1>
+
+                <p>
+                    {{ $activity->description ?: 'Actividad deportiva disponible en nuestro centro. Consulta los próximos turnos para reservar tu plaza.' }}
+                </p>
+            </div>
+
+            <div class="activity-info-grid">
+
+                <div class="activity-info-item">
+                    <div class="activity-info-icon">
+                        <span>👤</span>
+                    </div>
+
+                    <div>
+                        <span>Instructor</span>
+                        <strong>{{ $activity->instructor ?? 'No asignado' }}</strong>
+                    </div>
+                </div>
+
+                <div class="activity-info-item">
+                    <div class="activity-info-icon">
+                        <span>📍</span>
+                    </div>
+
+                    <div>
+                        <span>Instalación</span>
+                        <strong>{{ $activity->installation->name ?? 'Por confirmar' }}</strong>
+                    </div>
+                </div>
+
+                <div class="activity-info-item">
+                    <div class="activity-info-icon">
+                        <span>👥</span>
+                    </div>
+
+                    <div>
+                        <span>Plazas por turno</span>
+                        <strong class="available-places">{{ $activity->max_capacity }}</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="activity-detail-separator"></div>
+
+            <section class="slots-section">
+                <div class="slots-header">
+                    <div>
+                        <h2>Próximos turnos</h2>
+                        <p>Selecciona un horario disponible para reservar tu plaza.</p>
+                    </div>
+                </div>
+
+                <div class="slots-list">
+                    @forelse ($timeSlots as $slot)
+                        @php
+                            $booked = $slot->bookings_count;
+                            $full = $booked >= $activity->max_capacity;
+                            $available = max($activity->max_capacity - $booked, 0);
+                        @endphp
+
+                        <div class="slot-card">
+                            <div class="slot-date-block">
+                                <span class="slot-day">
+                                    {{ $slot->start_time->translatedFormat('d M') }}
+                                </span>
+
+                                <span class="slot-weekday">
+                                    {{ $slot->start_time->translatedFormat('l') }}
+                                </span>
+                            </div>
+
+                            <div class="slot-main-info">
+                                <strong>
+                                    {{ $slot->start_time->format('H:i') }} - {{ $slot->end_time->format('H:i') }}
+                                </strong>
+
+                                <span>
+                                    {{ $available }} de {{ $activity->max_capacity }} plazas disponibles
+                                </span>
+                            </div>
+
+                            <div class="slot-action">
+                                @auth
+                                    @if (! $full)
+                                        <form method="POST" action="{{ route('bookings.store') }}">
+                                            @csrf
+                                            <input type="hidden" name="time_slot_id" value="{{ $slot->id }}">
+
+                                            <button type="submit" class="reserve-button">
+                                                Reservar plaza
+                                            </button>
+                                        </form>
+                                    @else
+                                        <span class="full-badge">Completo</span>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="reserve-button">
+                                        Inicia sesión para reservar
+                                    </a>
+                                @endauth
+                            </div>
+                        </div>
+
+                    @empty
+                        <div class="empty-slots">
+                            <h3>No hay turnos programados</h3>
+                            <p>Actualmente esta actividad no tiene horarios disponibles. Vuelve a consultar más adelante.</p>
+                        </div>
+                    @endforelse
+                </div>
+            </section>
+
+        </div>
+
+    </article>
+
+</section>
+
 @endsection
