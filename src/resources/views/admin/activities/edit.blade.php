@@ -6,6 +6,15 @@
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white shadow sm:rounded-lg p-6">
+                @if ($errors->any())
+                    <div class="alert alert-error mb-4">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form method="post" action="{{ route('admin.activities.update', $activity) }}" enctype="multipart/form-data" class="space-y-4">
                     @csrf
                     @method('PUT')
