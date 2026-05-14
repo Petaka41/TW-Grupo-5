@@ -33,45 +33,21 @@
                 <h1>{{ $activity->name }}</h1>
 
                 <p>
-                    {{ $activity->description ?: 'Actividad deportiva disponible en nuestro centro. Consulta los próximos turnos para reservar tu plaza.' }}
+                    {{ $activity->description ?: 'Actividad deportiva disponible en nuestro centro.' }}
                 </p>
             </div>
 
-            <div class="activity-info-grid">
-
-                <div class="activity-info-item">
-                    <div class="activity-info-icon">
-                        <span>👤</span>
-                    </div>
-
-                    <div>
-                        <span>Instructor</span>
-                        <strong>{{ $activity->instructor ?? 'No asignado' }}</strong>
-                    </div>
-                </div>
-
-                <div class="activity-info-item">
-                    <div class="activity-info-icon">
-                        <span>📍</span>
-                    </div>
-
-                    <div>
-                        <span>Instalación</span>
-                        <strong>{{ $activity->installation->name ?? 'Por confirmar' }}</strong>
-                    </div>
-                </div>
-
+            <div class="activity-info-grid activity-info-grid-simple">
                 <div class="activity-info-item">
                     <div class="activity-info-icon">
                         <span>👥</span>
                     </div>
 
                     <div>
-                        <span>Plazas por turno</span>
-                        <strong class="available-places">{{ $activity->max_capacity }}</strong>
+                        <span>Capacidad</span>
+                        <strong>{{ $activity->max_capacity }} plazas</strong>
                     </div>
                 </div>
-
             </div>
 
             <div class="activity-detail-separator"></div>
@@ -79,8 +55,8 @@
             <section class="slots-section">
                 <div class="slots-header">
                     <div>
-                        <h2>Próximos turnos</h2>
-                        <p>Selecciona un horario disponible para reservar tu plaza.</p>
+                        <h2>Horarios disponibles</h2>
+                        <p>Consulta los próximos turnos disponibles para esta actividad.</p>
                     </div>
                 </div>
 
@@ -118,6 +94,7 @@
                                     @if (! $full)
                                         <form method="POST" action="{{ route('bookings.store') }}">
                                             @csrf
+
                                             <input type="hidden" name="time_slot_id" value="{{ $slot->id }}">
 
                                             <button type="submit" class="reserve-button">
@@ -137,8 +114,8 @@
 
                     @empty
                         <div class="empty-slots">
-                            <h3>No hay turnos programados</h3>
-                            <p>Actualmente esta actividad no tiene horarios disponibles. Vuelve a consultar más adelante.</p>
+                            <h3>No hay horarios disponibles</h3>
+                            <p>Actualmente esta actividad no tiene turnos programados.</p>
                         </div>
                     @endforelse
                 </div>
