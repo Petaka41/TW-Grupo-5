@@ -8,7 +8,6 @@
     <div class="admin-page">
         <section class="admin-hero">
             <div>
-                <p class="eyebrow">Frontend privado</p>
                 <h1>Gestión del centro</h1>
                 <p class="admin-hero-text">Aquí centralizas actividades, horarios y acceso al contenido de administración.</p>
             </div>

@@ -8,7 +8,6 @@
     <div class="profile-page">
         <div class="profile-hero">
             <div>
-                <p class="eyebrow">Área privada</p>
                 <h1>Tu cuenta</h1>
                 <p class="profile-hero-text">Actualiza tus datos, contraseña y preferencias de acceso desde aquí.</p>
             </div>
