@@ -51,7 +51,7 @@
 
                         <span class="user-role">
                             @if(auth()->user()->isAdmin())
-                                Administrador
+                                Admin
                             @else
                                 Socio
                             @endif
