@@ -15,6 +15,7 @@ Route::get('/actividades', [CatalogController::class, 'index'])->name('activitie
 Route::get('/actividades/{activity}', [CatalogController::class, 'show'])->name('activities.show');
 Route::view('/instalaciones', 'installations.index')->name('installations.index');
 Route::get('/contacto', ContactController::class)->name('contact');
+Route::post('/contacto', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,6 +32,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::view('/', 'admin.index')->name('index');
+    Route::view('/crear', 'admin.create')->name('create');
+    Route::view('/editar', 'admin.edit')->name('edit');
     Route::resource('activities', ActivityController::class)->except(['show']);
     Route::resource('activities.time-slots', TimeSlotController::class)
         ->except(['show'])

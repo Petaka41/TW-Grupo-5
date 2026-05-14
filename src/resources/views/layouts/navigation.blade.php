@@ -28,7 +28,7 @@
                         Mis reservas
                     </x-nav-link>
                     @if (Auth::user()->isAdmin())
-                        <x-nav-link :href="route('admin.activities.index')" :active="request()->routeIs('admin.*')">
+                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.*')">
                             Admin
                         </x-nav-link>
                     @endif
@@ -100,7 +100,7 @@
                 Mis reservas
             </x-responsive-nav-link>
             @if (Auth::user()->isAdmin())
-                <x-responsive-nav-link :href="route('admin.activities.index')" :active="request()->routeIs('admin.*')">
+                <x-responsive-nav-link :href="route('admin.index')" :active="request()->routeIs('admin.*')">
                     Admin
                 </x-responsive-nav-link>
             @endif

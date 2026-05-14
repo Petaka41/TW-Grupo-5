@@ -104,7 +104,7 @@
                 <a href="{{ route('dashboard') }}">Área privada</a>
 
                 @if(auth()->user()->isAdmin())
-                    <a href="{{ route('admin.activities.index') }}">Administración</a>
+                    <a href="{{ route('admin.index') }}">Administración</a>
                 @endif
             @endauth
         </aside>

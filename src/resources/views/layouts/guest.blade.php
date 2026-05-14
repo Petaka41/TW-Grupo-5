@@ -14,16 +14,32 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+    <body class="font-sans text-gray-900 antialiased auth-body">
+        <div class="auth-page">
+            <section class="auth-shell">
+                <div class="auth-visual">
+                    <a href="{{ route('home') }}" class="auth-brand">
+                        <x-application-logo class="auth-logo" />
+                        <span>G5 Sport</span>
+                    </a>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+                    <div class="auth-copy">
+                        <p class="eyebrow">Acceso privado</p>
+                        <h1>Reserva, gestiona y administra desde una misma cuenta.</h1>
+                        <p>Un único acceso para usuarios normales y administradores, con una interfaz más clara y coherente con el resto de la web.</p>
+                    </div>
+
+                    <div class="auth-points">
+                        <span>Inicio de sesión seguro</span>
+                        <span>Área privada unificada</span>
+                        <span>Panel admin diferenciado</span>
+                    </div>
+                </div>
+
+                <div class="auth-card">
+                    {{ $slot }}
+                </div>
+            </section>
             </div>
         </div>
     </body>
