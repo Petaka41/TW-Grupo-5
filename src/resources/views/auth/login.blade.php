@@ -25,23 +25,23 @@
         <div class="auth-row">
             <label for="remember_me" class="auth-remember">
                 <input id="remember_me" type="checkbox" class="auth-checkbox" name="remember">
-                <span>{{ __('Remember me') }}</span>
+                <span>{{ __('Recuerdame') }}</span>
             </label>
 
             @if (Route::has('password.request'))
-                <a class="auth-link" href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
+                <a class="auth-link" href="{{ route('password.request') }}">{{ __('¿Olvidaste la contraseña?') }}</a>
             @endif
         </div>
 
         <div class="auth-actions">
             <x-primary-button class="w-full justify-center">
-                {{ __('Log in') }}
+                {{ __('Acceder') }}
             </x-primary-button>
         </div>
     </form>
 
     <p class="auth-footer-link">
-        {{ __('Need an account?') }} <a href="{{ route('register') }}">{{ __('Register') }}</a>
+        {{ __('¿No tienes cuenta?') }} <a href="{{ route('register') }}">{{ __('Registrate') }}</a>
     </p>
     </form>
 </x-guest-layout>
