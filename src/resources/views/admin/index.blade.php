@@ -1,9 +1,12 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Panel de administración
-        </h2>
-    </x-slot>
+@extends('layouts.public')
+
+@section('title', 'Panel de administración — ' . config('app.name'))
+
+@section('content')
+
+    <div class="mb-6">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Panel de administración</h2>
+    </div>
 
     <div class="admin-page">
         <section class="admin-hero">
@@ -38,4 +41,5 @@
             </article>
         </section>
     </div>
-</x-app-layout>
+
+@endsection
