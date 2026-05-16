@@ -1,7 +1,12 @@
-<x-app-layout>
-    <x-slot name="header">
+@extends('layouts.public')
+
+@section('title', 'Mis reservas — ' . config('app.name'))
+
+@section('content')
+
+    <div class="mb-6">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">Mis reservas</h2>
-    </x-slot>
+    </div>
 
     <div class="py-12">
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 space-y-4">
@@ -11,6 +16,7 @@
             @error('cancel')
                 <div class="p-4 bg-red-50 text-red-800 rounded text-sm">{{ $message }}</div>
             @enderror
+
             <div class="bg-white shadow sm:rounded-lg overflow-x-auto">
                 <table class="min-w-full text-sm text-left">
                     <thead class="bg-gray-50">
@@ -50,4 +56,5 @@
             {{ $bookings->links() }}
         </div>
     </div>
-</x-app-layout>
+
+@endsection
