@@ -19,21 +19,15 @@
             <section class="auth-shell">
                 <div class="auth-visual">
                     <a href="{{ route('home') }}" class="auth-brand">
-                        <x-application-logo class="auth-logo" />
-                        <span>G5 Sport</span>
+                        <img src="{{ asset('images/logo-solo.png') }}" alt="Logo G5 Sport" class="auth-logo">                        <span>G5 Sport</span>
                     </a>
 
                     <div class="auth-copy">
-                        <p class="eyebrow">Acceso privado</p>
                         <h1>Reserva, gestiona y administra desde una misma cuenta.</h1>
                         <p>Un único acceso para usuarios normales y administradores, con una interfaz más clara y coherente con el resto de la web.</p>
                     </div>
 
-                    <div class="auth-points">
-                        <span>Inicio de sesión seguro</span>
-                        <span>Área privada unificada</span>
-                        <span>Panel admin diferenciado</span>
-                    </div>
+                
                 </div>
 
                 <div class="auth-card">

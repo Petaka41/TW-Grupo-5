@@ -1,6 +1,5 @@
 <x-guest-layout>
     <div class="auth-header">
-        <p class="eyebrow">Acceso</p>
         <h2>Iniciar sesión</h2>
         <p>Entra con tu cuenta para gestionar reservas o acceder al panel de administración si eres admin.</p>
     </div>
