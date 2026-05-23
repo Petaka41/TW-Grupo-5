@@ -17,9 +17,11 @@
                 Ver actividades
             </a>
 
-            <a href="{{ route('register') }}" class="btn-secondary">
-                Registrarse
-            </a>
+            @guest
+                <a href="{{ route('register') }}" class="btn-secondary">
+                    Registrarse
+                </a>
+            @endguest
         </div>
     </div>
 </section>
@@ -31,15 +33,15 @@
     <div class="cards-grid benefits-grid">
 
         <article class="benefit-card">
-            <div class="benefit-icon" aria-hidden="true">⏱</div>
+            <div class="benefit-icon" aria-hidden="true">💻​</div>
             <h3>Reserva Online</h3>
             <p>Reserva tus clases en cualquier momento.</p>
         </article>
 
         <article class="benefit-card">
-            <div class="benefit-icon" aria-hidden="true">👥</div>
-            <h3>Control de horarios</h3>
-            <p>Gestiona tus actividades fácilmente.</p>
+            <div class="benefit-icon" aria-hidden="true">🕑</div>
+            <h3>Diferentes horarios</h3>
+            <p>Disponibilidad de clases en horarios flexibles.</p>
         </article>
 
         <article class="benefit-card">
@@ -61,7 +63,7 @@
 
                 @if ($activity->image_path)
                     <img
-                        src="{{ Storage::url($activity->image_path) }}"
+                        src="{{ asset($activity->image_path) }}"
                         alt="Imagen de {{ $activity->name }}"
                     >
                 @else

@@ -130,7 +130,7 @@
                         <a href="{{ route('activities.index') }}">Actividades</a>
                         <a href="{{ route('installations.index') }}">Instalaciones</a>
                         <a href="{{ route('contact') }}">Contacto</a>
-                        <a href="{{ asset('como_se_hizo.pdf') }}" target="_blank" rel="noopener noreferrer">
+                        <a href="https://docs.google.com/document/d/10D0V2VE38qr8l8c0xkLIyiLL3K5pLxcKQkk3R2gPGFU/edit?usp=sharing" target="_blank" rel="noopener noreferrer">
                             Informe de la práctica
                         </a>
                     </nav>
