@@ -1181,8 +1181,8 @@ button {
 
 .installation-card {
     background-color: #ffffff;
-    border-radius: 14px;
-    padding: 34px 32px 30px;
+    border-radius: 16px;
+    overflow: hidden;
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.10);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -1192,56 +1192,70 @@ button {
     box-shadow: 0 14px 34px rgba(0, 0, 0, 0.14);
 }
 
-.installation-icon {
-    width: 58px;
-    height: 58px;
-    background-color: #171d2d;
-    color: #ffffff;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 27px;
-    margin-bottom: 26px;
+.installation-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.installation-card-content {
+    padding: 28px 30px 32px;
 }
 
 .installation-card h2 {
     font-size: 23px;
     font-weight: 600;
     color: #171d2d;
-    margin-bottom: 12px;
-}
-
-.installation-type {
-    color: #ff6b35;
-    font-size: 16px;
-    margin-bottom: 22px;
+    margin-bottom: 14px;
 }
 
 .installation-description {
     color: #4b5563;
     font-size: 17px;
     line-height: 1.65;
-    margin-bottom: 24px;
-}
-
-.installation-capacity {
-    color: #374151;
-    font-size: 15px;
     margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 9px;
 }
 
-.installation-capacity span {
-    color: #ff6b35;
-    font-size: 18px;
+/* Responsive instalaciones */
+@media (max-width: 1100px) {
+    .installations-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-.installation-capacity strong {
-    color: #171d2d;
-    font-weight: 600;
+@media (max-width: 700px) {
+    .installations-page {
+        padding: 36px 0 70px;
+    }
+
+    .installations-header {
+        margin-bottom: 36px;
+    }
+
+    .installations-header h1 {
+        font-size: 32px;
+    }
+
+    .installations-header p {
+        font-size: 17px;
+    }
+
+    .installations-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .installation-image {
+        height: 200px;
+    }
+
+    .installation-card-content {
+        padding: 24px;
+    }
+
+    .installation-card h2 {
+        font-size: 21px;
+    }
 }
 
 /* =========================
@@ -1503,7 +1517,7 @@ button {
 .profile-grid,
 .admin-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 24px;
 }
 

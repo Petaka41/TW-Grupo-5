@@ -16,7 +16,7 @@
             </div>
 
             <div class="admin-hero-actions">
-                <a href="{{ route('admin.activities.index') }}" class="action-button">Ver actividades</a>
+
                 <a href="{{ route('admin.activities.create') }}" class="action-button action-button-secondary">Crear actividad</a>
             </div>
         </section>
@@ -34,11 +34,6 @@
                 <a href="{{ route('admin.activities.index') }}">Ir a horarios</a>
             </article>
 
-            <article class="action-card">
-                <h3>Plantillas</h3>
-                <p>Accesos rápidos a las vistas genéricas de crear y editar.</p>
-                <a href="{{ route('admin.create') }}">Crear</a>
-            </article>
         </section>
     </div>
 

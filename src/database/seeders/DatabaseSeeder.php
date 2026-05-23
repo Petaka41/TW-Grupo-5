@@ -33,11 +33,11 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $definitions = [
-            ['name' => 'Pista de pádel 1', 'description' => 'Pista cubierta, iluminación LED.', 'max_capacity' => 4],
-            ['name' => 'Sala de musculación', 'description' => 'Zona de pesas y máquinas guiadas.', 'max_capacity' => 20],
-            ['name' => 'Clase de yoga', 'description' => 'Nivel mixto. Lleva esterilla.', 'max_capacity' => 15],
-            ['name' => 'Piscina — calle libre', 'description' => 'Carril para nado libre.', 'max_capacity' => 8],
-            ['name' => 'Sala de spinning', 'description' => 'Bici fija con monitor cardíaco.', 'max_capacity' => 12],
+            ['name' => 'Pádel', 'description' => 'Pista cubierta, iluminación LED.', 'max_capacity' => 4, 'image_path' => 'images/padel.jpg'],
+            ['name' => 'Crossfit', 'description' => 'Zona de pesas y máquinas, sesión guiada.', 'max_capacity' => 20, 'image_path' => 'images/musculacion.jpg'],
+            ['name' => 'Yoga', 'description' => 'Nivel mixto. Lleva esterilla.', 'max_capacity' => 15, 'image_path' => 'images/clase-de-yoga.jpg'],
+            ['name' => 'Piscina — calle libre', 'description' => 'Carril para nado libre.', 'max_capacity' => 8, 'image_path' => 'images/natacion.jpg'],
+            ['name' => 'Spinning', 'description' => 'Bici fija con monitor cardíaco.', 'max_capacity' => 12, 'image_path' => 'images/spinning.jpg'],
         ];
 
         foreach ($definitions as $def) {
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder
                 'name' => $def['name'],
                 'description' => $def['description'],
                 'max_capacity' => $def['max_capacity'],
-                'image_path' => null,
+                'image_path' => $def['image_path'] ?? null,
             ]);
 
             for ($i = 0; $i < 3; $i++) {
