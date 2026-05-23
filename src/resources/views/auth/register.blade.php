@@ -1,6 +1,5 @@
 <x-guest-layout>
     <div class="auth-header">
-        <p class="eyebrow">Nuevo acceso</p>
         <h2>Crear cuenta</h2>
         <p>Regístrate para reservar actividades, consultar tus reservas y usar el área privada.</p>
     </div>
