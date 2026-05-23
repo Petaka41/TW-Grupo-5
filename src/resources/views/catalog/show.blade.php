@@ -14,7 +14,7 @@
 
         @if ($activity->image_path)
             <img
-                src="{{ Storage::url($activity->image_path) }}"
+                src="{{ asset($activity->image_path) }}"
                 alt="Imagen de {{ $activity->name }}"
                 class="activity-detail-image"
             >
