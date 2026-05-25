@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\TimeSlot;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $originPath = public_path('images');
+        $destinationPath = storage_path('app/public/activities');
+
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
+
+        if (File::exists($originPath)) {
+            $files = File::files($originPath);
+            foreach ($files as $file) {
+                if ($file->isFile()) {
+                    File::copy($file->getPathname(), $destinationPath . '/' . $file->getFilename());
+                }
+            }
+        }
 
         User::query()->whereIn('email', ['admin@deportivo.test', 'socio@deportivo.test'])->delete();
 
@@ -33,12 +49,13 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
+        // Guardamos la ruta interna relativa que requiere el Storage de Laravel
         $definitions = [
-            ['name' => 'Pádel', 'description' => 'Pista cubierta, iluminación LED.', 'max_capacity' => 4, 'image_path' => 'public/images/padel.jpg'],
-            ['name' => 'Crossfit', 'description' => 'Zona de pesas y máquinas, sesión guiada.', 'max_capacity' => 20, 'image_path' => 'public/images/musculacion.jpg'],
-            ['name' => 'Yoga', 'description' => 'Nivel mixto. Lleva esterilla.', 'max_capacity' => 15, 'image_path' => 'public/images/clase-de-yoga.jpg'],
-            ['name' => 'Piscina — calle libre', 'description' => 'Carril para nado libre.', 'max_capacity' => 8, 'image_path' => 'public/images/natacion.jpg'],
-            ['name' => 'Spinning', 'description' => 'Bici fija con monitor cardíaco.', 'max_capacity' => 12, 'image_path' => 'public/images/spinning.jpg'],
+            ['name' => 'Pádel', 'description' => 'Pista cubierta, iluminación LED.', 'max_capacity' => 4, 'image_path' => 'activities/padel.jpg'],
+            ['name' => 'Crossfit', 'description' => 'Zona de pesas y máquinas, sesión guiada.', 'max_capacity' => 20, 'image_path' => 'activities/musculacion.jpg'],
+            ['name' => 'Yoga', 'description' => 'Nivel mixto. Lleva esterilla.', 'max_capacity' => 15, 'image_path' => 'activities/clase-de-yoga.jpg'],
+            ['name' => 'Piscina — calle libre', 'description' => 'Carril para nado libre.', 'max_capacity' => 8, 'image_path' => 'activities/natacion.jpg'],
+            ['name' => 'Spinning', 'description' => 'Bici fija con monitor cardíaco.', 'max_capacity' => 12, 'image_path' => 'activities/spinning.jpg'],
         ];
 
         foreach ($definitions as $def) {
