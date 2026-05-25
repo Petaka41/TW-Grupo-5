@@ -14,6 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        if (!File::exists($destinationPath)) {
+            File::makeDirectory($destinationPath, 0755, true);
+        }
+
+        
+        if (File::exists($originPath)) {
+            $files = File::files($originPath);
+            foreach ($files as $file) {
+                File::copy($file->getPathname(), $destinationPath . '/' . $file->getFilename());
+            }
+        }
         User::query()->whereIn('email', ['admin@deportivo.test', 'socio@deportivo.test'])->delete();
 
         User::create([
