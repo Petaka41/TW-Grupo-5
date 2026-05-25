@@ -6,6 +6,7 @@ use App\Models\Activity;
 use App\Models\TimeSlot;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
