@@ -113,7 +113,7 @@ Con los contenedores en marcha:
 docker exec -it deportivo-app php artisan test
 ```
 
-La suite actual valida sobre todo **autenticación y perfil (Breeze)**, la página de inicio y **cancelación de reservas** (dueño, regla `start_time`, 403 entre usuarios). Convención del equipo: ejecutar tests antes de fusionar a `main`. **Inventario detallado de cada test y opciones de ejecución:** [docs/TESTING.md](docs/TESTING.md). Ampliación recomendada (`bookings.store`, admin): ver la spec técnica, sección 10.2.
+La suite actual valida sobre todo **autenticación y perfil (Breeze)**, la página de inicio y **cancelación de reservas** (dueño, regla `start_time`, 403 entre usuarios). Convención del equipo: ejecutar tests antes de fusionar a `main`.
 
 ---
 
