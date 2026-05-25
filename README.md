@@ -102,18 +102,6 @@ En desarrollo local puedes usar `npm run dev` si tienes Node 20+.
 ### 9. Contrato de datos para el equipo
 
 - Campos Eloquent, rutas nombradas y usuarios de prueba: [docs/campos-api.md](docs/campos-api.md).
-- **Especificación técnica y manual de operaciones** (Git, tests, glosario de errores de reserva, política de cancelación): [docs/BACKEND_TECHNICAL_SPEC.md](docs/BACKEND_TECHNICAL_SPEC.md).
-- **Guía de pruebas PHPUnit** (inventario de los 28 tests, comandos Docker/local, filtros): [docs/TESTING.md](docs/TESTING.md).
-
----
-
-## Colaboración en Git (equipo)
-
-- Rama **`main`:** solo cambios estables que pasen `php artisan test` y funcionen con Docker.
-- **Ramas propias:** `feat/…`, `fix/…` (ej. `feat/frontend-catalogo`). Evitar trabajar todos en `main`.
-- **Pull Requests:** revisión por al menos otro compañero antes de fusionar; comprobar login, catálogo y flujo demo si aplica.
-
-Detalle ampliado: [docs/BACKEND_TECHNICAL_SPEC.md](docs/BACKEND_TECHNICAL_SPEC.md) (sección *10. Operación en equipo*).
 
 ---
 
@@ -145,23 +133,6 @@ Una vez completados los pasos, podrás acceder en:
 
 ---
 
-## ⚠️ Solución de problemas comunes
-
-> [!IMPORTANT]
-> **¿La web se ve sin estilos (HTML “pelado”, sin CSS de Tailwind)?**  
-> Ocurre porque **`src/public/build`** no está en Git (está en `.gitignore`): un `git clone` fresco no trae los assets compilados de Vite.
->
-> **Soluciones:**
-> 1. Con **Node 20+**, en la carpeta `src/`: `npm install` y `npm run build`.
-> 2. Sin Node: pide a un compañero la carpeta **`build`** generada tras el build y colócala en **`src/public/build`** (ruta exacta).
-
-### Error de permisos (`tempnam` o "Permission Denied")
-
-Si al entrar en la web http://localhost:8080  ves un error relacionado con archivos temporales o permisos en `storage`, ejecuta:
-
-```bash
-sudo chmod -R 777 src/storage src/bootstrap/cache
-```
 
 ### Error de conexión a la base de datos
 
