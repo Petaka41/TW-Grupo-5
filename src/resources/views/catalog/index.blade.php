@@ -17,7 +17,7 @@
 
                 @if ($activity->image_path)
                     <img
-                        src="{{ asset($activity->image_path) }}"
+                        src="{{ Storage::url($activity->image_path) }}"
                         alt="{{ $activity->name }}"
                         class="catalog-card-image"
                     >
