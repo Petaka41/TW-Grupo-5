@@ -91,7 +91,18 @@
 
             <section class="contact-card location-card">
                 <h2>Ubicación</h2>
-                <div class="map-placeholder">Mapa de ubicación</div>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3037.5892618729586!2d-3.6882109!3d40.4168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI1JzAwLjUiTiAzwrA0MScxNy42Ilc!5e0!3m2!1ses!2ses!4v1234567890"
+                        width="100%" 
+                        height="300" 
+                        style="border:0; border-radius: 8px;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Ubicación del centro deportivo G5Sport">
+                    </iframe>
+                </div>
             </section>
         </div>
     </div>
