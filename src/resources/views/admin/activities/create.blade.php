@@ -1,10 +1,18 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">Nueva actividad</h2>
-    </x-slot>
+@extends('layouts.public')
 
+@section('title', 'Nueva Actividad — Admin')
+
+@section('content')
     <div class="py-12">
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6">
+                <div class="space-y-2">
+                    <p class="text-sm uppercase tracking-wider text-gray-500">Administración</p>
+                    <h3 class="text-2xl font-semibold text-gray-900">Nueva Actividad</h3>
+                </div>
+            </div>
+
             <div class="bg-white shadow sm:rounded-lg p-6">
                 @if ($errors->any())
                     <div class="alert alert-error mb-4">
@@ -34,11 +42,11 @@
                         <input type="file" name="image" accept="image/*" class="mt-1 block w-full text-sm">
                     </div>
                     <div class="flex gap-2">
-                        <button type="submit" class="px-4 py-2 bg-gray-800 text-white rounded-md text-sm">Guardar</button>
+                        <button type="submit" class="px-4 py-2 bg-[#ff6b35] text-white rounded-md text-sm">Guardar</button>
                         <a href="{{ route('admin.activities.index') }}" class="px-4 py-2 border rounded-md text-sm">Cancelar</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection
